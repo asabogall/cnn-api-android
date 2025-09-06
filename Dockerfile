@@ -2,21 +2,22 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
-# Instalar dependencias del sistema (versión corregida)
+# Instalar dependencias mínimas
 RUN apt-get update && apt-get install -y \
     libglib2.0-0 \
     && rm -rf /var/lib/apt/lists/*
 
-# Instalar dependencias Python
+# Copiar requirements primero
 COPY requirements.txt .
-RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt
 
-# Copiar código
+# Instalar dependencias Python
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copiar todo el código
 COPY . .
 
-# Exponer puerto
-EXPOSE 5000
+# Variable de entorno para Railway
+ENV PORT=5000
 
-# Comando para producción
-CMD ["sh", "-c", "gunicorn --bind 0.0.0.0:$PORT --workers 1 --timeout 120 app:app"]
+# Comando simplificado
+CMD python app.py
