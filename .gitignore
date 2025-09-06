@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+.venv/
+env/
+.env
+*.log
+.DS_Store
+.pytest_cache/
+*.sqlite3
+
+# NO ignorar el archivo de pesos
+!Modelo_Al_ADAM/weights.h5
