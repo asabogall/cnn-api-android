@@ -2,9 +2,8 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
-# Instalar dependencias del sistema
+# Instalar dependencias del sistema (versión corregida)
 RUN apt-get update && apt-get install -y \
-    libgl1-mesa-glx \
     libglib2.0-0 \
     && rm -rf /var/lib/apt/lists/*
 
